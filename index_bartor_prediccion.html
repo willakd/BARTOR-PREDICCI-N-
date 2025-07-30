@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Predicción: Cena de Navidad de Bartor</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f8f8;
+      text-align: center;
+      padding: 40px;
+    }
+    h1 {
+      color: #333;
+    }
+    .btn {
+      font-size: 18px;
+      padding: 10px 20px;
+      margin: 15px;
+      cursor: pointer;
+    }
+    .yes { background-color: #4caf50; color: white; border: none; }
+    .no  { background-color: #f44336; color: white; border: none; }
+    .result {
+      margin-top: 30px;
+      font-size: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>¿Bartor se comerá ese plato en la cena de Navidad?</h1>
+
+  <button class="btn yes" onclick="votar('si')">Sí</button>
+  <button class="btn no" onclick="votar('no')">No</button>
+
+  <div class="result" id="resultados">
+    Aún no hay votos.
+  </div>
+
+  <script>
+    let votos = { si: 0, no: 0 };
+
+    function votar(opcion) {
+      votos[opcion]++;
+      mostrarResultados();
+    }
+
+    function mostrarResultados() {
+      const total = votos.si + votos.no;
+      if (total === 0) {
+        document.getElementById("resultados").textContent = "Aún no hay votos.";
+        return;
+      }
+
+      const porcentajeSi = ((votos.si / total) * 100).toFixed(1);
+      const porcentajeNo = ((votos.no / total) * 100).toFixed(1);
+
+      document.getElementById("resultados").innerHTML = `
+        <p>Votos totales: ${total}</p>
+        <p>✅ Sí: ${votos.si} (${porcentajeSi}%)</p>
+        <p>❌ No: ${votos.no} (${porcentajeNo}%)</p>
+      `;
+    }
+  </script>
+</body>
+</html>
