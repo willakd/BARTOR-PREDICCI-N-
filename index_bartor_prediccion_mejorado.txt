@@ -1,0 +1,108 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Predicción: Cena de Navidad de Bartor</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #fceabb, #f8b500);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      color: #333;
+    }
+
+    .container {
+      background: white;
+      border-radius: 15px;
+      padding: 30px 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 1.5em;
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      font-size: 18px;
+      padding: 12px 24px;
+      margin: 10px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 45%;
+    }
+
+    .yes {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    .no {
+      background-color: #f44336;
+      color: white;
+    }
+
+    .result {
+      margin-top: 20px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #222;
+    }
+
+    .title {
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="title">¿Bartor se comerá ese platito en la cena de Navidad?</div>
+
+    <button class="btn yes" onclick="votar('si')">Sí</button>
+    <button class="btn no" onclick="votar('no')">No</button>
+
+    <div class="result" id="resultados">
+      Aún no hay votos.
+    </div>
+  </div>
+
+  <script>
+    let votos = { si: 0, no: 0 };
+
+    function votar(opcion) {
+      votos[opcion]++;
+      mostrarResultados();
+    }
+
+    function mostrarResultados() {
+      const total = votos.si + votos.no;
+      if (total === 0) {
+        document.getElementById("resultados").textContent = "Aún no hay votos.";
+        return;
+      }
+
+      const porcentajeSi = ((votos.si / total) * 100).toFixed(1);
+      const porcentajeNo = ((votos.no / total) * 100).toFixed(1);
+
+      document.getElementById("resultados").innerHTML = `
+        <p>Votos totales: ${total}</p>
+        <p>✅ Sí: ${votos.si} (${porcentajeSi}%)</p>
+        <p>❌ No: ${votos.no} (${porcentajeNo}%)</p>
+      `;
+    }
+  </script>
+</body>
+</html>
